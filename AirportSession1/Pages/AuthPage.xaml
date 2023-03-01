@@ -1,0 +1,52 @@
+﻿<Page x:Class="AirportSession1.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="AuthPage">
+    <StackPanel
+        Orientation="Vertical"
+        HorizontalAlignment="Center"
+        Margin="20">
+        <Image Source="../Images/amonic_logo.png"
+               Margin="0 0 0 50" 
+               MaxWidth="500"/>
+        <Grid HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="0 0 20 0"
+                       Grid.Row="0"
+                       Grid.Column="0">
+                Username:
+            </TextBlock>
+            <TextBox Width="300"
+                     Grid.Row="0"
+                     Margin="0 0 0 20"
+                     Grid.Column="1" />
+            <TextBlock Margin="0 0 20 0"
+                       Grid.Row="1"
+                       Grid.Column="0">
+                Password:
+            </TextBlock>
+            <PasswordBox Width="300"
+                         Grid.Row="1"
+                         Grid.Column="1" />
+        </Grid>
+        <StackPanel Margin="0 30 0 0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Width="100"
+                    Margin="0 0 40 0">
+                Login
+            </Button>
+            <Button Width="100">Exit</Button>
+        </StackPanel>
+    </StackPanel>
+</Page>
