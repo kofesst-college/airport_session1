@@ -17,3 +17,6 @@ D:\Projects\Rider\AirportSession1\AirportSession1\obj\Debug\AirportSession1.cspr
 D:\Projects\Rider\AirportSession1\AirportSession1\obj\Debug\AirportSession1.csproj.CoreCompileInputs.cache
 D:\Projects\Rider\AirportSession1\AirportSession1\obj\Debug\AirportSession1.exe
 D:\Projects\Rider\AirportSession1\AirportSession1\obj\Debug\AirportSession1.pdb
+D:\Projects\Rider\AirportSession1\AirportSession1\obj\Debug\Pages\UsersPage.g.cs
+D:\Projects\Rider\AirportSession1\AirportSession1\obj\Debug\AirportSession1_MarkupCompile.lref
+D:\Projects\Rider\AirportSession1\AirportSession1\obj\Debug\Pages\UsersPage.baml
