@@ -10,7 +10,7 @@ namespace AirportSession1
         public MainWindow()
         {
             InitializeComponent();
-            FrPageContent.Content = new AuthPage();
+            FrPageContent.Content = new AuthPage(this);
         }
     }
 }

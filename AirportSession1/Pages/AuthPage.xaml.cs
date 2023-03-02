@@ -17,8 +17,11 @@ namespace AirportSession1.Pages
         private TimeSpan retryAuthOffset;
         private int loginAttempts;
 
-        public AuthPage()
+        private readonly MainWindow mainWindow;
+
+        public AuthPage(MainWindow mainWindow)
         {
+            this.mainWindow = mainWindow;
             functions = new QueriesTableAdapter();
             users = new UsersTableAdapter();
             InitializeComponent();
@@ -52,6 +55,7 @@ namespace AirportSession1.Pages
             switch (user.RoleID)
             {
                 case 1:
+                    mainWindow.FrPageContent.Content = new UsersPage();
                     break;
                 case 2:
                     break;

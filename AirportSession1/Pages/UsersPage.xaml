@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:AirportSession1.Pages"
       mc:Ignorable="d"
-      Title="UsersPage" Height="450" Width="800">
-    <StackPanel>
+      Title="UsersPage">
+    <StackPanel VerticalAlignment="Top">
         <Menu>
             <MenuItem Header="Add user"></MenuItem>
             <MenuItem Header="Exit"></MenuItem>
@@ -16,33 +16,51 @@
                         DockPanel.Dock="Top"
                         Margin="0 0 0 10">
                 <TextBlock Margin="0 0 10 0">Office:</TextBlock>
-                <ComboBox Width="100">
-                    <ComboBox.Items>
-                        <ComboBoxItem>All offices</ComboBoxItem>
-                    </ComboBox.Items>
+                <ComboBox Width="100"
+                          Margin="0 0 10 0"
+                          Name="CbOffices">
                 </ComboBox>
+                <Button Click="BtnClearFilter_Click">Clear filter</Button>
             </StackPanel>
-            <DataGrid
+            <DataGrid Name="DgUsers"
+                      AutoGenerateColumns="False"
                 Margin="0 0 0 10"
                 Height="350"
                 DockPanel.Dock="Top"
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Stretch">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" />
-                    <DataGridTextColumn Header="Last name" />
-                    <DataGridTextColumn Header="Age" />
-                    <DataGridTextColumn Header="User role" />
-                    <DataGridTextColumn Header="Email address" />
-                    <DataGridTextColumn Header="Office" />
+                    <DataGridTextColumn Header="Name"
+                                        Binding="{Binding FirstName}"/>
+                    <DataGridTextColumn Header="Last name"
+                                        Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Header="Age"
+                                        Binding="{Binding Birthdate}"/>
+                    <DataGridTextColumn Header="User role"
+                                        Binding="{Binding RoleTitle}"/>
+                    <DataGridTextColumn Header="Email address"
+                                        Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Office"
+                                        Binding="{Binding OfficeTitle}"/>
                 </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Active}" Value="false">
+                                <Setter Property="Background" Value="Red"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
             </DataGrid>
             <StackPanel
                 DockPanel.Dock="Bottom"
                 Orientation="Horizontal">
                 <Button Width="75"
                         Margin="0 0 10 0">Change role</Button>
-                <Button Width="125">Enable/Disable login</Button>
+                <Button Width="125"
+                        Name="BtnToggleActive" Click="BtnToggleActive_Click">
+                    Enable/Disable login</Button>
             </StackPanel>
         </DockPanel>
     </StackPanel>
