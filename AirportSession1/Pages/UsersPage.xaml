@@ -8,8 +8,10 @@
       Title="UsersPage">
     <StackPanel VerticalAlignment="Top">
         <Menu>
-            <MenuItem Header="Add user"></MenuItem>
-            <MenuItem Header="Exit"></MenuItem>
+            <MenuItem Header="Add user"
+                      Click="MenuAddUser_Click"></MenuItem>
+            <MenuItem Header="Exit"
+                      Click="MenuExit_Click"></MenuItem>
         </Menu>
         <DockPanel Margin="10">
             <StackPanel Orientation="Horizontal"
@@ -23,6 +25,9 @@
                 <Button Click="BtnClearFilter_Click">Clear filter</Button>
             </StackPanel>
             <DataGrid Name="DgUsers"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      IsReadOnly="True"
                       AutoGenerateColumns="False"
                 Margin="0 0 0 10"
                 Height="350"
@@ -35,7 +40,7 @@
                     <DataGridTextColumn Header="Last name"
                                         Binding="{Binding LastName}"/>
                     <DataGridTextColumn Header="Age"
-                                        Binding="{Binding Birthdate}"/>
+                                        Binding="{Binding Birthdate,StringFormat='yyyy-MM-dd'}"/>
                     <DataGridTextColumn Header="User role"
                                         Binding="{Binding RoleTitle}"/>
                     <DataGridTextColumn Header="Email address"

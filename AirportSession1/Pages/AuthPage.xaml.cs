@@ -52,10 +52,16 @@ namespace AirportSession1.Pages
                 return;
             }
 
+            if (!user.Active)
+            {
+                MessageBox.Show("Your account was disabled");
+                return;
+            }
+
             switch (user.RoleID)
             {
                 case 1:
-                    mainWindow.FrPageContent.Content = new UsersPage();
+                    mainWindow.FrPageContent.Content = new UsersPage(mainWindow);
                     break;
                 case 2:
                     break;

@@ -1,4 +1,5 @@
 ﻿using AirportSession1.AirportDatasetTableAdapters;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,19 +9,25 @@ namespace AirportSession1.Pages
 {
     public partial class UsersPage : Page
     {
-        private readonly UsersDataTableAdapter users;
+        private readonly UsersDataTableAdapter joinedUsers;
+        private readonly UsersTableAdapter users;
         private readonly OfficesTableAdapter offices;
 
         private List<AirportDataset.UsersDataRow> usersList;
+        private int officeId = -1;
 
-        public UsersPage()
+        private readonly MainWindow mainWindow;
+
+        public UsersPage(MainWindow mainWindow)
         {
+            this.mainWindow = mainWindow;
             InitializeComponent();
 
-            users = new UsersDataTableAdapter();
+            joinedUsers = new UsersDataTableAdapter();
+            users = new UsersTableAdapter();
             offices = new OfficesTableAdapter();
 
-            usersList = users.GetData().ToList();
+            usersList = joinedUsers.GetData().ToList();
             DgUsers.ItemsSource = usersList;
 
             InitOffices();
@@ -38,18 +45,20 @@ namespace AirportSession1.Pages
             var selected = CbOffices.SelectedItem;
             if (selected == null) return;
             var office = selected as AirportDataset.OfficesRow;
-            FilterByOffice(office.ID);
+            officeId = office.ID;
+            FilterByOffice();
         }
 
         private void BtnClearFilter_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            CbOffices.SelectedIndex = -1;
-            FilterByOffice(-1);
+            officeId = -1;
+            CbOffices.SelectedIndex = officeId;
+            FilterByOffice();
         }
 
-        private void FilterByOffice(int officeId)
+        private void FilterByOffice()
         {
-            usersList = users.GetData().Where((ud) => officeId == -1 || ud.OfficeID == officeId).ToList();
+            usersList = joinedUsers.GetData().Where((ud) => officeId == -1 || ud.OfficeID == officeId).ToList();
             DgUsers.ItemsSource = usersList;
         }
 
@@ -57,9 +66,24 @@ namespace AirportSession1.Pages
         {
             var selected = DgUsers.SelectedItem;
             if (selected == null) return;
-            var user = selected as AirportDataset.UsersDataRow;
+            var selectedUser = selected as AirportDataset.UsersDataRow;
+            var user = users.GetData().Where((u) => u.ID == selectedUser.IDUser).FirstOrDefault();
+            if (user == null) return;
             user.Active = !user.Active;
-            // TODO
+            var dataset = new AirportDataset();
+            dataset.Users.ImportRow(user);
+            users.Update(dataset.Users);
+            FilterByOffice();
+        }
+
+        private void MenuExit_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            mainWindow.FrPageContent.Content = new AuthPage(mainWindow);
+        }
+
+        private void MenuAddUser_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
         }
     }
 }
